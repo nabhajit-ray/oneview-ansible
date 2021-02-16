@@ -8,8 +8,8 @@ jobs:
     strategy:
       matrix:
         python_version:
-        - 3.6
-        - 3.7
+        - 2.7
+        - 3.5
         ansible:
         - stable-2.10
     runs-on: ubuntu-latest
@@ -33,9 +33,14 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Install ansible-base (${{ matrix.ansible }})
         run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+      - name: Install ansible test
+        run: |
+          git clone -b $BRANCH --single-branch https://github.com/ansible/ansible.git
+          source ./ansible/hacking/env-setup
+          pip install pyyaml jinja2 nose pytest passlib pycrypto six voluptuous
+        
+        
  
-      - name: Install ansible_collections.hpe.oneview
-        run: ansible-galaxy collection install hpe.oneview -p ../../
+      
 
-      - name: Run sanity tests
-        run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }}
+ 
