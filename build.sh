@@ -120,21 +120,6 @@ else
   exit_code_flake8=1
 fi
 
-#Documentation is generated only in local builds
-if [ -z "$TRAVIS" ]; then
-  echo -e "\n${COLOR_START}Generating markdown documentation${COLOR_END}"
-  build-doc/run-doc-generation.sh
-  exit_code_doc_generation=$?
-
-#Coveralls runs only when Travis is running the build
-else
-  echo -e "\n${COLOR_START}Running Coveralls${COLOR_END}"
-  coverage run --source=library/ -m pytest test/
-  coveralls
-  exit_code_coveralls=$?
-fi
-
-
 echo -e "\n${COLOR_START}Running tests${COLOR_END}"
 python -m pytest test/
 exit_code_tests=$?
@@ -145,8 +130,8 @@ print_summary "Modules validation" ${exit_code_module_validation}
 print_summary "Playbooks validation" ${exit_code_playbook_validation}
 print_summary "Unit tests" ${exit_code_tests}
 print_summary "Flake8" ${exit_code_flake8}
-print_summary "Doc Generation" ${exit_code_doc_generation}
-print_summary "Coveralls" ${exit_code_coveralls}
+#print_summary "Doc Generation" ${exit_code_doc_generation}
+#print_summary "Coveralls" ${exit_code_coveralls}
 
 echo "Done. Your build exited with ${exit_code_build_oneview_ansible}."
 exit ${exit_code_build_oneview_ansible}
