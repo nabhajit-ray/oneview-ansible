@@ -38,6 +38,13 @@ jobs:
           git clone https://github.com/ansible/ansible.git
           source ./ansible/hacking/env-setup
           pip install pyyaml jinja2 nose pytest passlib pycrypto six voluptuous
+      - name: Setup environment for Docker image publish
+        run: |
+         echo "RELEASE_VERSION=$(echo ${GITHUB_REF:10})" >> $GITHUB_ENV
+         echo "ANSIBLE_LIBRARY=$PWD/library" >> $GITHUB_ENV
+         echo "PYTHONPATH=$ANSIBLE_LIBRARY:$PYTHONPATH" >> $GITHUB_ENV
+         touch examples/vars/config.yml
+         ./build.sh
         
         
  
