@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: ${{ matrix.python_version }}
       - name : Setup ansible env
-        run:  echo "BRANCH=stable-2.4y" >> $GITHUB_ENV
+        run:  echo "BRANCH=stable-2.4" >> $GITHUB_ENV
       - name: Set up Ansible ${{ matrix.ansible_version}}
         run: pip install ansible==${{ matrix.ansible_version}}
 
