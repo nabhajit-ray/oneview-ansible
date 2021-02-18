@@ -15,7 +15,7 @@ jobs:
         - 2.2.2.0
         - 2.3.0.0
         - 2.4.0.0
-        - stable-2.4
+       
         
     runs-on: ubuntu-latest
     steps:
@@ -26,6 +26,8 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python_version }}
+      - name : Setup ansible env
+        run:  echo "BRANCH=stable-2.4y" >> $GITHUB_ENV
       - name: Set up Ansible ${{ matrix.ansible_version}}
         run: pip install ansible==${{ matrix.ansible_version}}
 
@@ -39,9 +41,11 @@ jobs:
         run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
       - name: Install ansible test
         run: |
-          git clone https://github.com/ansible/ansible.git
+          if [[ $BRANCH ]]; then 
+          git clone -b $BRANCH --single-branch https://github.com/ansible/ansible.git
           source ./ansible/hacking/env-setup
           pip install pyyaml jinja2 nose pytest passlib pycrypto six voluptuous
+          fi
       - name: Setup environment for Ansible build
         run: |
          echo "ANSIBLE_LIBRARY=$PWD/library" >> $GITHUB_ENV
