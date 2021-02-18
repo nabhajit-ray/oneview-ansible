@@ -12,7 +12,10 @@ jobs:
         exclude:
       # excludes node 4 on macOS
          - python_version: 3.5
-           ansible_version: 2.1.5.0    
+           ansible_version: 2.1.5.0        
+         - python_version: 3.5
+           ansible_version: 2.2.2.0
+          
     runs-on: ubuntu-latest
     steps:
 
