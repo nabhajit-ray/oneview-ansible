@@ -11,7 +11,7 @@ jobs:
         - 2.7
         - 3.5
         ansible:
-        - stable-2.10
+        - stable-2.4
     runs-on: ubuntu-latest
     steps:
 
