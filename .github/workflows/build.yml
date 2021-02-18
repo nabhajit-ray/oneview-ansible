@@ -35,7 +35,7 @@ jobs:
         run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
       - name: Install ansible test
         run: |
-          git clone -b $BRANCH --single-branch https://github.com/ansible/ansible.git
+          git clone https://github.com/ansible/ansible.git
           source ./ansible/hacking/env-setup
           pip install pyyaml jinja2 nose pytest passlib pycrypto six voluptuous
         
