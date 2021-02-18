@@ -4,7 +4,7 @@ on:
 
 jobs:
   sanity:
-    name: Sanity (${{ matrix.ansible }})
+    name: Sanity (${{ matrix.ansible_version }})
     strategy:
       matrix:
         python_version:
@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: ${{ matrix.python_version }}
       - name: Set up Ansible ${{ matrix.ansible_version}}
-        run: pip install anisble==${{ matrix.ansible_version}}
+        run: pip install ansible==${{ matrix.ansible_version}}
 
       - name: Install dependencies
         run: |
@@ -35,7 +35,7 @@ jobs:
           pip install future
           if [ -f test_requirements.txt ]; then pip install -r test_requirements.txt; fi
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Install ansible-base (${{ matrix.ansible }})
+      - name: Install ansible-base (${{ matrix.ansible_version }})
         run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
       - name: Install ansible test
         run: |
