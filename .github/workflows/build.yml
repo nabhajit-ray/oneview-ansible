@@ -51,8 +51,8 @@ jobs:
          touch examples/vars/config.yml
          ./build.sh
       - name: Coveralls Config
-        env: 
-             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: coveralls
         uses: AndreMiras/coveralls-python-action@develop        
         with:
