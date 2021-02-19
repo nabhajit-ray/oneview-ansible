@@ -52,6 +52,8 @@ jobs:
          ./build.sh
       - name: coveralls
         uses: AndreMiras/coveralls-python-action@develop
+        env: 
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
         with:
           github-token: ${{ secrets.COVERALLS_TOKEN }}
           parallel: true
