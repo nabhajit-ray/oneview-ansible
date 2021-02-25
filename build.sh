@@ -36,8 +36,8 @@ setup () {
   cd ${BASH_SOURCE%/*}
   export ANSIBLE_LIBRARY=library
   export ANSIBLE_MODULE_UTILS=$ANSIBLE_LIBRARY/module_utils
-  export COVERALLS_REPO_TOKEN=${{secrets.COVERALL_TOKEN }}
-  echo $(env)
+  #export COVERALLS_REPO_TOKEN=${{secrets.COVERALL_TOKEN }}
+  echo $COVERALLS_REPO_TOKEN
 
   if [ -z ${PYTHON_SDK+x} ]; then
     export PYTHON_SDK=../oneview-python
