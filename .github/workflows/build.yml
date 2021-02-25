@@ -47,9 +47,11 @@ jobs:
       - name: Setup environment for Ansible build
         run: |
          echo "ANSIBLE_LIBRARY=$PWD/library" >> $GITHUB_ENV
+         echo "ANSIBLE_MODULE_UTILS=$ANSIBLE_LIBRARY/module_utils" >> $GITHUB_ENV
          echo "PYTHONPATH=$ANSIBLE_LIBRARY:$PYTHONPATH" >> $GITHUB_ENV
          echo "COVERALLS_REPO_TOKEN=${{ secrets.COVERALL_TOKEN }}" >> $GITHUB_ENV
          touch examples/vars/config.yml
+         coverage run --source=library/ -m pytest test/
          ./build.sh
      
       - name: coveralls
