@@ -36,7 +36,7 @@ setup () {
   cd ${BASH_SOURCE%/*}
   export ANSIBLE_LIBRARY=library
   export ANSIBLE_MODULE_UTILS=$ANSIBLE_LIBRARY/module_utils
-  export COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN
+  export COVERALLS_REPO_TOKEN=${{secrets.COVERALL_TOKEN }}
   echo $(env)
 
   if [ -z ${PYTHON_SDK+x} ]; then
